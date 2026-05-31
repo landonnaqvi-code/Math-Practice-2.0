@@ -1,0 +1,1 @@
+Game is played against a computer based opponent. Questions regarding math operations are asked to player. If answered correct, opponent loses health. However, if answered wrong, player loses health. Game is simulated by graphical representations of cannons firing to reduce opponent's health. Game ends once one opponent has no health left.
