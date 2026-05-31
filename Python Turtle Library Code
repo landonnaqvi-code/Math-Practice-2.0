@@ -1,0 +1,162 @@
+#import libraries needed in project
+import random
+import time
+import turtle
+#Set everything up to create the canon
+d = turtle.Screen()
+t = turtle.Turtle()
+p = turtle.Turtle()
+l = turtle.Turtle()
+a = turtle.Turtle()
+b = turtle.Turtle()
+c = turtle.Turtle()
+z = turtle.Turtle()
+z.hideturtle()
+z.penup()
+d.bgcolor("green")
+p.speed(0)
+l.speed(0)
+a.speed(0)
+b.speed(0)
+c.speed(0)
+b.pensize(7)
+c.pensize(7)
+b.penup()
+b.hideturtle()
+c.penup()
+c.hideturtle()
+a.penup()
+a.hideturtle()
+l.penup()
+l.hideturtle()
+l.left(180)
+a.left(180)
+p.hideturtle()
+p.penup()
+t.hideturtle()
+t.color("blue")
+t.speed(0)
+t.penup()
+t.setpos(-200, 100)
+t.pendown()
+t.fillcolor("blue")
+#create the canon
+def canon():
+  t.begin_fill()
+  t.forward(30)
+  t.left(90)
+  t.forward(10)
+  t.left(90)
+  t.forward(30)
+  t.end_fill()
+canon()
+#set up coordinates for another canon
+t.hideturtle()
+t.penup()
+t.setpos(-200, 20)
+#create another canon
+t.pendown()
+t.left(180)
+canon()
+#set positions for enemy canons and create them
+t.penup()
+t.setpos(200, -10)
+t.pendown()
+t.pencolor("red")
+t.fillcolor("red")
+canon()
+t.penup()
+t.setpos(200, 70)
+t.pendown()
+t.left(180)
+canon()
+t.penup()
+#create the health bars
+b.setpos(-200, 150)
+b.pendown()
+b.color("blue")
+b.forward(200)
+c.setpos(200, 150)
+c.pendown()
+c.color("red")
+c.left(180)
+c.forward(200)
+# give health bars draining abilities
+playerHealth = 200
+enemyHealth = 200
+def player_health_drain():
+  b.color("black")
+  b.backward(50)
+  b.color("blue")
+def enemy_health_drain():
+  c.color("black")
+  c.backward(50)
+  c.color("red")
+# make the canons shoot
+t.color("blue")
+p.color("blue")
+def shoot():
+  for x in range(3):
+    t.speed(0)
+    p.speed(0)
+    t.setpos(-200, 105)
+    p.setpos(-200, 25)
+    t.speed(8)
+    p.speed(8)
+    t.showturtle()
+    p.showturtle()
+    t.forward(400)
+    t.hideturtle()
+    p.forward(400)
+    p.hideturtle()
+    t.speed(0)
+    p.speed(0)
+    time.sleep(0.05)
+def enemy_shoot():
+  l.color("red")
+  a.color("red")
+  for x in range(3):
+    l.speed(0)
+    a.speed(0)
+    l.setpos(200, -15)
+    a.setpos(200, 65)
+    l.speed(8)
+    a.speed(8)
+    l.showturtle()
+    a.showturtle()
+    l.forward(400)
+    l.hideturtle()
+    a.forward(400)
+    a.hideturtle()
+    l.speed(0)
+    a.speed(0)
+    time.sleep(0.05)
+# set up the questions
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40]
+wl = 0
+playerHealth = 200
+enemyHealth = 200
+while wl==0:
+  num1 = random.choice(numbers)
+  num2 = random.choice(numbers)
+  print(num1)
+  print(num2)
+  correctAnswer = num1 * num2
+  playerAnswer = int(input("Multiply these two numbers."))
+  if playerAnswer==correctAnswer:
+    correctAnswer = num1 * num2
+    print("correct")
+    shoot()
+    enemy_health_drain()
+    enemyHealth = enemyHealth - 50
+  else:
+    print("incorrect")
+    enemy_shoot()
+    player_health_drain()
+    playerHealth = playerHealth - 50
+  if playerHealth==0:
+    z.write("defeat", None, "center", "50pt Arial")
+    wl = "lose"
+  elif enemyHealth==0:
+    z.write("Victory", None, "center", "50pt Arial")
+    wl = "win"
